@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="format-detection" content="telephone=no, email=no, address=no">
+  <title>media-controller</title>
+  <style>
+    :root {
+      font-size: 16px;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-color: #ffffff;
+      color: #222222;
+      font: 1rem / 1.5 Arial, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="player">
+    <div class="preview">
+      <video src="media/Spring_-_Blender_Open_Movie.mp4" width="640" height="268"></video>
+      <video src="media/Agent_327_-_Operation_Barbershop.mp4" width="640" height="268"></video>
+    </div>
+    <div class="control">
+      <input data-seek type="range" value="0" min="0" max="0" style="width: 600px;"><br>
+      <button data-play>Play</button>
+      <button data-pause>Pause</button>
+      <button data-stop>Stop</button>
+      <span>PlaybackRate</span>
+      <input data-playback-rate type="range" value="1" min="0.25" max="2" step="0.25">
+      <span data-current-time="0">0</span>
+      <span>/</span>
+      <span data-duration="0">0</span>
+      <span>Volume</span>
+      <input data-volume type="range" value="1" min="0" max="1" step="0.2">
+      <button data-muted="true">Mute</button>
+      <button data-muted="">Unmute</button>
+    </div>
+  </div>
+
+  <script src="dist/main.js" type="module"></script>
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "media-controller",
+  "type": "module",
+  "scripts": {
+    "prestart": "npm install && npm run build",
+    "start": "simple-dev-server ./",
+    "prebuild": "rm -rf dist && eslint --ext '.ts' src",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "simple-dev-server": "https://github.com/akiraohgaki/simple-dev-server/archive/refs/tags/v1.1.1.tar.gz",
+    "typescript": "*",
+    "eslint": "*",
+    "@typescript-eslint/parser": "*",
+    "@typescript-eslint/eslint-plugin": "*"
+  }
+}
