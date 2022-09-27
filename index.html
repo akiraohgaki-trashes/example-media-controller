@@ -23,6 +23,13 @@
       color: #222222;
       font: 1rem / 1.5 Arial, sans-serif;
     }
+
+    .clip>span {
+      margin: 0.2rem;
+      padding: 0.2rem;
+      border: 1px solid #dddddd;
+      font-size: 0.9rem;
+    }
   </style>
 </head>
 
@@ -32,6 +39,14 @@
       <video src="media/Spring_-_Blender_Open_Movie.mp4" width="640" height="268"></video>
       <video src="media/Agent_327_-_Operation_Barbershop.mp4" width="640" height="268"></video>
     </div>
+
+    <div class="clip">
+      <label><input data-play-segments type="checkbox"> Play in time range</label>
+      <span data-start-time="120" data-end-time="130"></span>
+      <span data-start-time="60" data-end-time="70"></span>
+      <span data-start-time="180" data-end-time="190"></span>
+    </div>
+
     <div class="control">
       <input data-seek type="range" value="0" min="0" max="0" style="width: 600px;"><br>
       <button data-play>Play</button>
