@@ -1,4 +1,4 @@
-import MediaController from './MediaController.js';
+import MediaController from './MediaController.ts';
 
 function convertTimeToHumanReadable(time: number): string {
   const date = new Date(Math.floor(time * 1000));
@@ -35,14 +35,11 @@ controller.onloadeddata = () => {
     const target = event.target as Element;
     if (target.hasAttribute('data-play')) {
       controller.play();
-    }
-    else if (target.hasAttribute('data-pause')) {
+    } else if (target.hasAttribute('data-pause')) {
       controller.pause();
-    }
-    else if (target.hasAttribute('data-stop')) {
+    } else if (target.hasAttribute('data-stop')) {
       controller.stop();
-    }
-    else if (target.hasAttribute('data-muted')) {
+    } else if (target.hasAttribute('data-muted')) {
       controller.muted = target.getAttribute('data-muted') ? true : false;
     }
   });
@@ -51,11 +48,9 @@ controller.onloadeddata = () => {
     const target = event.target as HTMLInputElement;
     if (target.hasAttribute('data-seek')) {
       controller.currentTime = parseInt(target.value);
-    }
-    else if (target.hasAttribute('data-playback-rate')) {
+    } else if (target.hasAttribute('data-playback-rate')) {
       controller.playbackRate = parseFloat(target.value);
-    }
-    else if (target.hasAttribute('data-volume')) {
+    } else if (target.hasAttribute('data-volume')) {
       controller.volume = parseFloat(target.value);
     }
   });

@@ -1,13 +1,12 @@
 export default class MediaController {
-
-  private _mediaCollection: Set<HTMLMediaElement>;
-  private _primaryMedia: HTMLMediaElement;
+  #mediaCollection: Set<HTMLMediaElement>;
+  #primaryMedia: HTMLMediaElement;
 
   constructor(mediaList: Iterable<HTMLMediaElement>) {
-    this._mediaCollection = new Set(mediaList);
-    this._primaryMedia = document.createElement('video');
+    this.#mediaCollection = new Set(mediaList);
+    this.#primaryMedia = document.createElement('video');
 
-    for (const media of this._mediaCollection) {
+    for (const media of this.#mediaCollection) {
       media.controls = false;
       media.autoplay = false;
       media.loop = false;
@@ -18,12 +17,12 @@ export default class MediaController {
       media.muted = false;
     }
 
-    const checkList = new Set(this._mediaCollection);
-    const timerId = window.setInterval(() => {
+    const checkList = new Set(this.#mediaCollection);
+    const timerId = globalThis.setInterval(() => {
       for (const media of checkList) {
         if (media.readyState >= 2) {
-          if ((this._primaryMedia.duration || 0) < media.duration) {
-            this._primaryMedia = media;
+          if ((this.#primaryMedia.duration || 0) < media.duration) {
+            this.#primaryMedia = media;
           }
           checkList.delete(media);
         }
@@ -36,55 +35,59 @@ export default class MediaController {
   }
 
   get primaryMedia(): HTMLMediaElement {
-    return this._primaryMedia;
+    return this.#primaryMedia;
   }
 
   get duration(): number {
-    return this._primaryMedia.duration;
+    return this.#primaryMedia.duration;
   }
 
+  // deno-lint-ignore explicit-module-boundary-types
   set currentTime(time: number) {
-    for (const media of this._mediaCollection) {
+    for (const media of this.#mediaCollection) {
       media.currentTime = Math.min(media.duration, time);
     }
   }
 
   get currentTime(): number {
-    return this._primaryMedia.currentTime;
+    return this.#primaryMedia.currentTime;
   }
 
+  // deno-lint-ignore explicit-module-boundary-types
   set playbackRate(rate: number) {
-    for (const media of this._mediaCollection) {
+    for (const media of this.#mediaCollection) {
       media.playbackRate = rate;
     }
   }
 
   get playbackRate(): number {
-    return this._primaryMedia.playbackRate;
+    return this.#primaryMedia.playbackRate;
   }
 
+  // deno-lint-ignore explicit-module-boundary-types
   set volume(volume: number) {
-    for (const media of this._mediaCollection) {
+    for (const media of this.#mediaCollection) {
       media.volume = volume;
     }
   }
 
   get volume(): number {
-    return this._primaryMedia.volume;
+    return this.#primaryMedia.volume;
   }
 
+  // deno-lint-ignore explicit-module-boundary-types
   set muted(muted: boolean) {
-    for (const media of this._mediaCollection) {
+    for (const media of this.#mediaCollection) {
       media.muted = muted;
     }
   }
 
   get muted(): boolean {
-    return this._primaryMedia.muted;
+    return this.#primaryMedia.muted;
   }
 
   play(): void {
-    for (const media of this._mediaCollection) {
+    for (const media of this.#mediaCollection) {
       if (!media.ended) {
         media.play();
       }
@@ -92,18 +95,17 @@ export default class MediaController {
   }
 
   pause(): void {
-    for (const media of this._mediaCollection) {
+    for (const media of this.#mediaCollection) {
       media.pause();
     }
   }
 
   stop(): void {
-    for (const media of this._mediaCollection) {
+    for (const media of this.#mediaCollection) {
       media.pause();
       media.currentTime = 0;
     }
   }
 
-  onloadeddata(): void { }
-
+  onloadeddata(): void {}
 }
