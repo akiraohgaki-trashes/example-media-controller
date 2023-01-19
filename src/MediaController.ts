@@ -20,7 +20,7 @@ export default class MediaController {
     const checkList = new Set(this.#mediaCollection);
     const timerId = globalThis.setInterval(() => {
       for (const media of checkList) {
-        if (media.readyState >= 2) {
+        if (media.readyState >= 1) {
           if ((this.#primaryMedia.duration || 0) < media.duration) {
             this.#primaryMedia = media;
           }
